@@ -21,4 +21,4 @@ class LoginPage(BasePage):
         self.hacer_clic(self.BTN_LOGIN)
 
     def obtener_mensaje_error(self):
-        return self.obtain_text(self.LBL_ERROR) if self.obtener_texto(self.LBL_ERROR) else ""
+        return self.obtener_texto(self.LBL_ERROR) if self.obtener_texto(self.LBL_ERROR) else ""
