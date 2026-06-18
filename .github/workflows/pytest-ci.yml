@@ -1,0 +1,41 @@
+name: Suite de Pruebas Automatizadas (UI & API)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Copiar el repositorio de código
+      uses: actions/checkout@v4
+
+    - name: Configurar entorno de Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Instalar dependencias del sistema
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Ejecutar Suite de Pruebas Completa (Headless Mode)
+      # Nota: Para correr en GitHub Actions, Selenium necesita ejecutarse en segundo plano (headless).
+      # Puedes modificar el archivo conftest.py para que lea una variable de entorno o active options.add_argument("--headless") si corre en CI.
+      run: |
+        pytest
+
+    - name: Almacenar Reportes Visuales de la Ejecución
+      if: always() # Garantiza que se guarden los reportes aunque un test falle
+      uses: actions/upload-artifact@v4
+      with:
+        name: reporte-html-y-evidencias
+        path: |
+          reports/
+          logs/
+        retention-days: 5
