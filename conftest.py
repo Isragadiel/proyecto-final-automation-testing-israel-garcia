@@ -10,23 +10,27 @@ log = get_logger("Conftest")
 @pytest.fixture(scope="function")
 def driver():
     """
-    Fixture que inicializa el navegador antes de cada test
-    y lo cierra automáticamente al finalizar, garantizando la independencia de los tests.
+    Fixture que inicializa el navegador. Activa el modo Headless de forma
+    automática si detecta que la prueba se ejecuta en el entorno de GitHub Actions.
     """
     log.info("Iniciando el navegador Chrome para la prueba...")
     options = webdriver.ChromeOptions()
     
-    # Configuraciones recomendadas para estabilidad
-    options.add_argument("--start-maximized")
+    # Si detecta que corre en la nube de GitHub Actions, usa modo Headless sin pantalla
+    if os.environ.get('GITHUB_ACTIONS') == 'true':
+        options.add_argument("--headless=new")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+    else:
+        # Si corre en tu computadora, abre la ventana maximizada normalmente
+        options.add_argument("--start-maximized")
+    
     options.add_argument("--disable-extensions")
     
-    # Inicializamos el WebDriver
     driver = webdriver.Chrome(options=options)
     
-    # Entregamos el driver al test
     yield driver
     
-    # Código de limpieza (Teardown) se ejecuta al terminar el test
     log.info("Cerrando el navegador.")
     driver.quit()
 
