@@ -1,0 +1,5 @@
+[
+  {"usuario": "standard_user", "clave": "secret_sauce", "debe_funcionar": true},
+  {"usuario": "locked_out_user", "clave": "secret_sauce", "debe_funcionar": false},
+  {"usuario": "user_invalido", "clave": "clave_falsa", "debe_funcionar": false}
+]
