@@ -41,3 +41,66 @@ El diseño del framework sigue las mejores prácticas de la industria, aplicando
 ├── conftest.py               # Fixtures globales de Selenium y Hooks de captura de pantalla
 ├── pytest.ini                # Configuración global y flags de Pytest
 └── requirements.txt          # Lista de dependencias del proyecto
+
+## Instalación
+
+Clonar el repositorio:
+
+```bash
+git clone https://github.com/usuario/proyecto-final-automation-testing-israel-garcia.git
+cd proyecto-final-automation-testing-israel-garcia
+```
+
+Crear entorno virtual:
+
+```bash
+python -m venv .venv
+```
+
+Activar entorno:
+
+```bash
+.venv\Scripts\activate
+```
+
+Instalar dependencias:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Ejecución de Pruebas
+
+Ejecutar todas las pruebas:
+
+```bash
+pytest
+```
+
+Ejecutar solo UI:
+
+```bash
+pytest -m ui
+```
+
+Ejecutar solo API:
+
+```bash
+pytest -m api
+```
+
+## Reportes
+
+Al finalizar la ejecución se genera:
+
+```text
+reports/reporte_final.html
+```
+
+El reporte muestra:
+
+- Casos ejecutados
+- Estado (Pass/Fail)
+- Tiempo de ejecución
+- Logs de error
+- Capturas de pantalla automáticas para pruebas fallidas
