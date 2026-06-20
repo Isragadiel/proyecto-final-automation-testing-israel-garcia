@@ -17,8 +17,10 @@ class BasePage:
         return self.wait.until(EC.visibility_of_element_located(locator))
 
     def hacer_clic(self, locator):
-        self.log.info(f"Haciendo clic en el elemento con selector: {locator}")
-        self.encontrar_elemento(locator).click()
+        self.log.info(f"Haciendo clic en el elemento: {locator}")
+        elemento = self.encontrar_elemento(locator)
+        elemento.click()
+        
 
     def escribir(self, locator, texto):
         self.log.info(f"Escribiendo '{texto}' en el elemento: {locator}")
